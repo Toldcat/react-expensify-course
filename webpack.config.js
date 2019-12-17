@@ -11,7 +11,7 @@ module.exports = env => {
     //compiled file
     output: {
       filename: 'bundle.js',
-      path: __dirname + '/public',
+      path: __dirname + '/public' + '/dist',
       publicPath: '/'
     },
     //module adding
@@ -48,7 +48,8 @@ module.exports = env => {
     devServer: {
       contentBase: __dirname + '/public',
       //making sure we are using client side routing
-      historyApiFallback: true
+      historyApiFallback: true,
+      publicPath: '/dist/'
     }
   }
 }
