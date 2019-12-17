@@ -8,7 +8,9 @@
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
     "serve": "live-server public/",
-    "dev-server": "webpack-dev-server"
+    "dev-server": "webpack-dev-server",
+    "start": "node server/server.js",
+    "heroku-postbuild": "npm run build:prod"
   },
   "author": "Andrew Dobrych",
   "license": "ISC",
@@ -36,6 +38,7 @@
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "live-server": "^1.2.1",
     "moment": "^2.24.0",
     "react": "^16.11.0",
