@@ -11,7 +11,7 @@ exports[`should render expense list with empty message 1`] = `
 exports[`should render expense list with expenses 1`] = `
 <div>
   <ExpenseListItem
-    amount={195600}
+    amount={1240}
     createdAt={0}
     description="Gum"
     id="1"

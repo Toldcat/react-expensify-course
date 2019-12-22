@@ -59,8 +59,8 @@ test('should sort by amount', () => {
   }
   const result = getVisibleExpenses(expensesTestData, filters)
   expect(result).toEqual([
-    expensesTestData[0],
     expensesTestData[2],
+    expensesTestData[0],
     expensesTestData[1]
   ])
 })

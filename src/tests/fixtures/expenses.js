@@ -5,7 +5,7 @@ const expensesTestData = [
     id: '1',
     description: 'Gum',
     note: '',
-    amount: 195600,
+    amount: 1240,
     createdAt: 0
   },
   {
