@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import configureStore from './store/configureStore'
 import './styles/styles.scss'
 import 'react-dates/lib/css/_datepicker.css'
+import './firebase/firebase'
 
 const store = configureStore()
 

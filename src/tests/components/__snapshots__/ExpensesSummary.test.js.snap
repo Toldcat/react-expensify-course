@@ -5,7 +5,9 @@ exports[`should render Expenses Summary component 1`] = `
   <p>
     Showing 
     3
-     expenses totalling £
+     
+    expenses
+     totalling £
     NaN
   </p>
 </div>

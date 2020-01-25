@@ -6,7 +6,9 @@ import visibleExpenses from '../selectors/expenses'
 export const ExpensesSummary = props => (
   <div>
     <p>
-      Showing {props.expenses.length} expenses totalling £{props.count / 100}
+      Showing {props.expenses.length}{' '}
+      {props.expenses.length === 1 ? 'expense' : 'expenses'} totalling £
+      {props.count / 100}
     </p>
   </div>
 )
