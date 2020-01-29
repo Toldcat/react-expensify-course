@@ -8,7 +8,7 @@ export const addExpense = expense => ({
 })
 
 export const startAddExpense = (expenseData = {}) => {
-  return dispatch => {
+  return async dispatch => {
     const {
       description = '',
       note = '',
@@ -16,17 +16,13 @@ export const startAddExpense = (expenseData = {}) => {
       createdAt = 0
     } = expenseData
     const expense = { description, note, amount, createdAt }
-    return database
-      .ref('expenses')
-      .push(expense)
-      .then(ref => {
-        dispatch(
-          addExpense({
-            id: ref.key,
-            ...expense
-          })
-        )
+    const ref = await database.ref('expenses').push(expense)
+    dispatch(
+      addExpense({
+        id: ref.key,
+        ...expense
       })
+    )
   }
 }
 
@@ -36,13 +32,9 @@ export const removeExpense = ({ id } = {}) => ({
 })
 
 export const startRemoveExpense = ({ id } = {}) => {
-  return dispatch => {
-    return database
-      .ref(`expenses/${id}`)
-      .remove()
-      .then(() => {
-        dispatch(removeExpense({ id }))
-      })
+  return async dispatch => {
+    await database.ref(`expenses/${id}`).remove()
+    dispatch(removeExpense({ id }))
   }
 }
 
@@ -52,6 +44,13 @@ export const editExpense = (id, updates) => ({
   updates
 })
 
+export const startEditExpense = (id, updates) => {
+  return async dispatch => {
+    await database.ref(`expenses/${id}`).update(updates)
+    dispatch(editExpense(id, updates))
+  }
+}
+
 //SET_EXPENSES - get array from firebase
 export const setExpenses = expenses => ({
   type: 'SET_EXPENSES',
@@ -59,24 +58,19 @@ export const setExpenses = expenses => ({
 })
 
 export const startSetExpenses = () => {
-  return dispatch => {
-    return database
-      .ref('expenses')
-      .once('value')
-      .then(snapshot => {
-        const expenses = []
-
-        snapshot.forEach(childSnapshot => {
-          expenses.push({
-            id: childSnapshot.key,
-            ...childSnapshot.val()
-          })
+  return async dispatch => {
+    try {
+      const snapshot = await database.ref('expenses').once('value')
+      const expenses = []
+      snapshot.forEach(childSnapshot => {
+        expenses.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val()
         })
-
-        dispatch(setExpenses(expenses))
       })
-      .catch(e => {
-        console.log('Error fetching data', e)
-      })
+      dispatch(setExpenses(expenses))
+    } catch (e) {
+      console.log('Error fetching data', e)
+    }
   }
 }
