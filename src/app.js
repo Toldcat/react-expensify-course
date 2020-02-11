@@ -25,7 +25,13 @@ const renderApp = () => {
   }
 }
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'))
+const loader = (
+  <div className='loader'>
+    <img className='loader__image' src='/images/loader.gif' />
+  </div>
+)
+
+ReactDOM.render(loader, document.getElementById('app'))
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
